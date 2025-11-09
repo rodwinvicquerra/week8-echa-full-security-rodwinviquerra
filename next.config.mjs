@@ -16,6 +16,10 @@ const nextConfig = {
   },
   // Disable page optimization during development
   reactStrictMode: false,
+  // Experimental features to help with build
+  experimental: {
+    missingSuspenseWithCSRBailout: false,
+  },
   // Configure webpack to ignore system files
   webpack: (config, { isServer }) => {
     config.watchOptions = {
