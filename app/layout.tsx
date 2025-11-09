@@ -22,18 +22,38 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  // Get Clerk publishable key from environment
+  // NEXT_PUBLIC_ prefix makes it available on client side
+  const publishableKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  
   return (
-    <ClerkProvider>
-      <html lang="en" suppressHydrationWarning>
-        <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning>
+      <body className={`font-sans ${GeistSans.variable} ${GeistMono.variable} antialiased`}>
+        {publishableKey ? (
+          <ClerkProvider publishableKey={publishableKey}>
+            <Suspense fallback={null}>
+              <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+                {children}
+              </ThemeProvider>
+            </Suspense>
+            <Analytics />
+          </ClerkProvider>
+        ) : (
           <Suspense fallback={null}>
             <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-              {children}
+              <div className="min-h-screen flex items-center justify-center bg-gray-900">
+                <div className="text-center text-white p-8">
+                  <h1 className="text-2xl font-bold mb-4">Configuration Error</h1>
+                  <p className="mb-4">Clerk environment variables are not configured.</p>
+                  <p className="text-sm text-gray-400">
+                    Please set NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY in your Vercel environment variables.
+                  </p>
+                </div>
+              </div>
             </ThemeProvider>
           </Suspense>
-          <Analytics />
-        </body>
-      </html>
-    </ClerkProvider>
+        )}
+      </body>
+    </html>
   )
 }
