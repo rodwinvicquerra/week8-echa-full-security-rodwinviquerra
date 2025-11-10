@@ -6,13 +6,12 @@ import { useAuth } from "@clerk/nextjs"
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import { useTheme } from "next-themes"
-import { ThemeToggle } from "@/components/theme-toggle"
-import { AnimatedBackground } from "@/components/animated-background"
+import { ThemeToggle } from "@/components/common"
 
 export default function SignUpPage() {
   const { isSignedIn } = useAuth()
   const router = useRouter()
-  const { theme, resolvedTheme } = useTheme()
+  const { resolvedTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
@@ -23,43 +22,33 @@ export default function SignUpPage() {
     if (isSignedIn) router.replace("/portfolio")
   }, [isSignedIn, router])
 
-  // Determine if dark mode is active
-  const isDark = mounted && (resolvedTheme === "dark" || theme === "dark")
+  const isDark = mounted && resolvedTheme === "dark"
 
   return (
-    <div className="min-h-screen w-full bg-gradient-to-b from-background to-background/40 relative overflow-hidden">
-      <AnimatedBackground />
-      <div className="fixed top-4 left-4 z-50">
+    <div className="min-h-screen w-full bg-gradient-to-br from-background via-background to-secondary/20 relative overflow-hidden">
+      <div className="fixed top-4 right-4 z-50">
         <ThemeToggle />
       </div>
-      <div className="mx-auto max-w-7xl px-6 py-20 relative z-10">
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-extrabold tracking-tight mb-4">
-            Welcome to Rodwin's Portfolio
+      
+      <div className="mx-auto max-w-7xl px-6 py-12 md:py-20 relative z-10">
+        <div className="mx-auto max-w-2xl text-center mb-8">
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-4 text-foreground">
+            Create Account
           </h1>
           <p className="text-muted-foreground text-lg md:text-xl">
-            Start your journey here. Create your account to unlock the full experience.
+            Sign up to access my portfolio and explore my work.
           </p>
         </div>
 
-        <div className="mx-auto max-w-xl">
+        <div className="mx-auto max-w-md">
           <div className="mb-4 text-center text-sm text-muted-foreground">
             <span>Already have an account? </span>
-            <Link href="/sign-in" className="text-primary hover:underline font-medium">Sign in</Link>
+            <Link href="/sign-in" className="text-primary hover:text-primary/80 underline font-semibold">
+              Sign in
+            </Link>
           </div>
 
-          <div className={`rounded-2xl border backdrop-blur-sm shadow-xl p-4 md:p-6 ${
-            isDark
-              ? "border-gray-300 bg-white/95"
-              : "border-slate-400 bg-slate-800/95"
-          }`}>
-            <div className="text-center mb-4">
-              <p className={`text-sm uppercase tracking-wider font-semibold ${
-                isDark ? "text-black" : "text-white"
-              }`}>
-                Sign up with Clerk
-              </p>
-            </div>
+          <div className="rounded-xl border bg-card shadow-lg p-6 md:p-8">
             <SignUp
               afterSignInUrl="/portfolio"
               afterSignUpUrl="/portfolio"
@@ -70,46 +59,36 @@ export default function SignUpPage() {
                   socialButtonsPlacement: "bottom",
                   socialButtonsVariant: "iconButton",
                   logoPlacement: "none",
-                  showOptionalFields: true,
                 },
                 variables: {
-                  colorPrimary: isDark ? "#ffffff" : "#000000",
-                  colorText: isDark ? "#000000" : "#ffffff",
-                  colorBackground: isDark ? "#ffffff" : "#1e293b",
-                  colorInputBackground: isDark ? "#f8f9fa" : "#334155",
-                  colorInputText: isDark ? "#000000" : "#ffffff",
-                  colorTextSecondary: isDark ? "#4b5563" : "#cbd5e1",
-                  colorNeutral: isDark ? "#e5e7eb" : "#475569",
-                  colorDanger: "#ef4444",
+                  colorPrimary: isDark ? "#60a5fa" : "#2563eb",
+                  colorText: isDark ? "#f1f5f9" : "#0f172a",
+                  colorBackground: isDark ? "#1e293b" : "#ffffff",
+                  colorInputBackground: isDark ? "#334155" : "#f8fafc",
+                  colorInputText: isDark ? "#f1f5f9" : "#0f172a",
                   borderRadius: "0.5rem",
                 },
                 elements: {
                   rootBox: "mx-auto w-full",
-                  card: "border-0 bg-transparent shadow-none max-w-xl w-full",
+                  card: "border-0 bg-transparent shadow-none",
                   header: "hidden",
-                  form: "space-y-4",
-                  formFieldInput: isDark
-                    ? "!text-lg !h-14 !bg-white !text-black !placeholder:text-gray-500 !border-2 !border-gray-300 focus-visible:!ring-2 focus-visible:!ring-black/20 focus-visible:!border-black !transition-all !duration-200 !font-medium !rounded-lg"
-                    : "!text-lg !h-14 !bg-slate-700 !text-white !placeholder:text-slate-300 !border-2 !border-slate-500 focus-visible:!ring-2 focus-visible:!ring-blue-500/50 focus-visible:!border-blue-400 !transition-all !duration-200 !font-medium !rounded-lg",
-                  formFieldLabel: isDark
-                    ? "!text-sm !font-medium !text-black"
-                    : "!text-sm !font-medium !text-white",
-                  formButtonPrimary: isDark
-                    ? "!h-12 !text-base !font-semibold !bg-black hover:!bg-gray-800 !text-white"
-                    : "!h-12 !text-base !font-semibold !bg-blue-600 hover:!bg-blue-500 !text-white",
-                  footer: "hidden",
-                  socialButtonsBlockButton: isDark
-                    ? "!h-12 md:!h-14 !text-sm !border-2 !border-gray-300 hover:!border-black !bg-white hover:!bg-gray-50 !text-black"
-                    : "!h-12 md:!h-14 !text-sm !border-2 !border-slate-400 hover:!border-slate-300 !bg-slate-600 hover:!bg-slate-500 !text-white",
-                  socialButtons: "!gap-3 !mt-4",
-                  alternativeMethods: "!mt-4",
-                  dividerLine: isDark ? "!bg-gray-300" : "!bg-slate-400",
-                  dividerText: isDark ? "!text-gray-600 !text-sm !bg-white" : "!text-slate-200 !text-sm !bg-slate-800",
-                  footerActionText: "hidden",
-                  footerActionLink: "hidden",
+                  formButtonPrimary: 
+                    "bg-primary hover:bg-primary/90 text-primary-foreground rounded-lg h-11 font-medium transition-colors",
+                  formFieldInput: 
+                    "rounded-lg border-input bg-background text-foreground h-11",
+                  footerAction: "hidden",
+                  dividerLine: "bg-border",
+                  dividerText: "text-muted-foreground",
+                  socialButtonsBlockButton: 
+                    "border-input hover:bg-accent hover:text-accent-foreground",
+                  formFieldLabel: "text-foreground font-medium",
                 },
               }}
             />
+          </div>
+
+          <div className="mt-6 text-center text-sm text-muted-foreground">
+            <p>By signing up, you agree to view my portfolio content.</p>
           </div>
         </div>
       </div>
