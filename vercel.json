@@ -52,42 +52,7 @@
       ]
     }
   ],
-  "firewall": {
-    "rules": [
-      {
-        "name": "Rate Limiting Global",
-        "description": "Limit requests per IP globally",
-        "action": {
-          "type": "rate_limit",
-          "limit": 1000,
-          "window": "1m"
-        }
-      },
-      {
-        "name": "Block Suspicious User Agents",
-        "description": "Block known malicious bots",
-        "condition": {
-          "type": "user_agent",
-          "pattern": "(bot|crawler|scraper|spider)"
-        },
-        "action": {
-          "type": "deny"
-        }
-      },
-      {
-        "name": "Geo-blocking High Risk",
-        "description": "Extra scrutiny for high-risk countries (optional)",
-        "condition": {
-          "type": "geo",
-          "countries": []
-        },
-        "action": {
-          "type": "challenge"
-        }
-      }
-    ]
-  },
   "env": {
-    "NEXT_PUBLIC_APP_URL": "https://clerk-portfolio-cleandesign-rodwin.vercel.app"
+    "NEXT_PUBLIC_APP_URL": "https://week8-echa-full-security-rodwinviquerra.vercel.app"
   }
 }
