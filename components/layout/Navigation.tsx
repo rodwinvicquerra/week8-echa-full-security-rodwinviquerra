@@ -64,9 +64,13 @@ export function Navigation() {
             <div className="hidden md:flex items-center gap-1">
               {visibleNavItems.map((item) =>
                 item.isExternal ? (
-                  <Button key={item.name} variant="ghost" asChild className="text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors px-4">
-                    <Link href={item.href}>{item.name}</Link>
-                  </Button>
+                  <Link 
+                    key={item.name} 
+                    href={item.href}
+                    className="inline-flex items-center justify-center rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors px-4 h-9 cursor-pointer"
+                  >
+                    {item.name}
+                  </Link>
                 ) : (
                   <Button key={item.name} variant="ghost" onClick={() => scrollToSection(item.href)} className="text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors px-4">
                     {item.name}
@@ -95,9 +99,14 @@ export function Navigation() {
             <div className="px-4 py-6 space-y-1">
               {visibleNavItems.map((item) =>
                 item.isExternal ? (
-                  <Button key={item.name} variant="ghost" asChild className="w-full justify-start text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50">
-                    <Link href={item.href}>{item.name}</Link>
-                  </Button>
+                  <Link 
+                    key={item.name} 
+                    href={item.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="flex w-full items-center justify-start rounded-md text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50 px-4 py-2 cursor-pointer"
+                  >
+                    {item.name}
+                  </Link>
                 ) : (
                   <Button key={item.name} variant="ghost" onClick={() => scrollToSection(item.href)} className="w-full justify-start text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted/50">
                     {item.name}
