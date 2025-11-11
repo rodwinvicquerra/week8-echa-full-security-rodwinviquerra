@@ -7,6 +7,22 @@ import { ExternalLink, Github, Star, Folder, TrendingUp, BookOpen } from "lucide
 
 const projects = [
   {
+    title: "Professional Portfolio with RBAC",
+    description:
+      "Complete professional portfolio featuring enterprise-grade security with Role-Based Access Control (RBAC) using Clerk. Includes admin-only security dashboard, MCP integration showcase, OAuth-protected API endpoints, and comprehensive security documentation. Built with Next.js 14, TypeScript, and deployed on Vercel with 95/100 security score.",
+    technologies: ["Next.js 14", "TypeScript", "Clerk RBAC", "OAuth 2.0", "Security Headers", "Vercel"],
+    github: "https://github.com/rodwinvicquerra/weekDeliverable-9-eca-rodwinV-",
+    demo: "https://week-deliverable-9-eca-rodwin-v.vercel.app/",
+    featured: true,
+    color: "from-primary to-accent",
+    caseStudy: {
+      problem: "Required professional portfolio with enterprise security and role-based access control",
+      solution: "Implemented Clerk RBAC with admin-only pages, OAuth MCP API, CSP headers, and security monitoring",
+      metrics: { security: "95/100", features: 12, rbac: "Admin/Viewer" },
+      lmsLink: "#"
+    }
+  },
+  {
     title: "OAuth MCP Authentication Demo",
     description:
       "Customized Model Context Protocol authentication demo with end-to-end OAuth flow. Features deployment URL with working authentication, client setup playbook, and comprehensive security documentation on token storage, scopes, and revocation.",

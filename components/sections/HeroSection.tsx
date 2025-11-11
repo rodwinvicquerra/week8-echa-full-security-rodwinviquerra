@@ -22,7 +22,7 @@ export function HeroSection() {
                 Rodwin Vicquerra
               </h1>
               <h2 className="text-2xl lg:text-3xl font-semibold text-foreground/80">
-                Full Stack Developer
+                Aspiring Full Stack Developer | Security-Focused
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-xl">
                 3rd Year IT Student at St. Paul University Philippines. Specialized in building modern web applications with React, Node.js, and Laravel.
