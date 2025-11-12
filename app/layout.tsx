@@ -7,6 +7,7 @@ import { ClerkProvider } from "@clerk/nextjs"
 import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Toaster } from "@/components/ui/sonner"
+import { ChatButton } from "@/components/chat/ChatButton"
 import { Suspense } from "react"
 
 export const metadata: Metadata = {
@@ -38,6 +39,7 @@ export default function RootLayout({
               </ThemeProvider>
             </Suspense>
             <Toaster />
+            <ChatButton />
             <Analytics />
           </ClerkProvider>
         ) : (
